@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.pd.jee</groupId>
+		<artifactId>my-jee</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>my-jee-testsuite</artifactId>
+	<packaging>pom</packaging>
+	<name>[${project.parent.artifactId}] TestSuite</name>
+
+	<properties>
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>			
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<!-- -Dts to activate testsuite-->
+		
+		<profile>
+			<id>activate_testsuite</id>
+			<activation>
+				<property><name>ts</name></property>
+			</activation>
+			<properties>
+				<maven.test.skip>my-jee</maven.test.skip>
+			</properties>
+		</profile>
+	</profiles>
+</project>

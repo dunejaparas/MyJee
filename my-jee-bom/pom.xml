@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>my-jee</artifactId>
+		<groupId>com.pd.jee</groupId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>	
+	<artifactId>my-jee-bom</artifactId>
+	<packaging>pom</packaging>
+	<name>[${project.parent.artifactId}] BOM module</name>
+	<description>BOM for my-jee project</description>
+
+	<properties>
+		<maven.site.skip>true</maven.site.skip>
+		<maven.site.deploy.skip>true</maven.site.deploy.skip>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.pd.jee</groupId>
+				<artifactId>my-jee-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.pd.jee</groupId>
+				<artifactId>my-jee-ejb</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.pd.jee</groupId>
+				<artifactId>my-jee-ear</artifactId>
+				<version>${project.version}</version>
+				<type>ear</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
