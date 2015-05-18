@@ -1,0 +1,189 @@
+Package javax.ws.rs
+
+High-level interfaces and annotations used to create RESTful service resources.
+See: 
+          Description
+
+Exception Summary
+WebApplicationException	Runtime exception for applications.
+ 
+Annotation Types Summary
+ApplicationPath			Identifies the application path that serves as the base URI for all resource URIs provided by Path.
+
+Consumes				Defines the media types that the methods of a resource class or MessageBodyReader can accept.
+
+CookieParam				Binds the value of a HTTP cookie to a resource method parameter, resource class field, or resource class bean property.
+
+DefaultValue			Defines the default value of request metadata that is bound using one of the following annotations: PathParam, QueryParam, MatrixParam, CookieParam, FormParam, or HeaderParam.
+
+DELETE					Indicates that the annotated method responds to HTTP DELETE requests
+
+Encoded					Disables automatic decoding of parameter values bound using QueryParam, PathParam, FormParam or MatrixParam.
+
+FormParam				Binds the value(s) of a form parameter contained within a request entity body to a resource method parameter.
+
+GET						Indicates that the annotated method responds to HTTP GET requests
+
+HEAD					Indicates that the annotated method responds to HTTP HEAD requests
+
+HeaderParam				Binds the value(s) of a HTTP header to a resource method parameter, resource class field, or resource class bean property.
+
+HttpMethod				Associates the name of a HTTP method with an annotation.
+
+MatrixParam				Binds the value(s) of a URI matrix parameter to a resource method parameter, resource class field, or resource class bean property.
+
+OPTIONS					Indicates that the annotated method responds to HTTP OPTIONS requests
+
+Path					Identifies the URI path that a resource class or class method will serve requests for.
+
+PathParam				Binds the value of a URI template parameter or a path segment containing the template parameter to a resource method parameter, resource class field, or resource class bean property.
+
+POST					Indicates that the annotated method responds to HTTP POST requests
+
+Produces				Defines the media type(s) that the methods of a resource class or MessageBodyWriter can produce.
+
+PUT						Indicates that the annotated method responds to HTTP PUT requests
+
+QueryParam				Binds the value(s) of a HTTP query parameter to a resource method parameter, resource class field, or resource class bean property.
+
+
+
+
+
+
+
+REST follows one-to-one mapping between create, read, update, and delete (CRUD) operations and HTTP methods.
+	-  To create a resource on the server, use POST.
+	-  To retrieve a resource, use GET.
+	-  To change the state of a resource or to update it, use PUT.
+	-  To remove or delete a resource, use DELETE.
+
+
+@GET
+
+	Annotate your Get request methods with @GET.
+	@GET
+	public String getHTML() {
+	  ...
+	}
+@Produces
+
+	@Produces annotation specifies the type of output this method (or web service) will produce.
+	@GET
+	@Produces("application/xml")
+	public Contact getXML() {
+	  ...
+	}
+
+	@GET
+	@Produces("application/json")
+	public Contact getJSON() {
+	  ...
+	}
+@Path
+
+	@Path annotation specify the URL path on which this method will be invoked.
+
+	@GET
+	@Produces("application/xml")
+	@Path("xml/{firstName}")
+	public Contact getXML() {
+	  ...
+	}
+
+
+@PathParam
+
+	We can bind REST-style URL parameters to method arguments using @PathParam annotation as shown below.
+	
+	@GET
+	@Produces("application/xml")
+	@Path("xml/{firstName}")
+	public Contact getXML(@PathParam("firstName") String firstName) {
+	  Contact contact = contactService.findByFirstName(firstName);
+	  return contact;
+	}
+	
+	@GET
+	@Produces("application/json")
+	@Path("json/{firstName}")
+	public Contact getJSON(@PathParam("firstName") String firstName) {
+	  Contact contact = contactService.findByFirstName(firstName);
+	  return contact;
+	}
+	
+	
+@QueryParam
+
+	Request parameters in query string can be accessed using @QueryParam annotation as shown below.
+	
+	@GET
+	@Produces("application/json")
+	@Path("json/companyList")
+	public CompanyList getJSON(@QueryParam("start") int start, @QueryParam("limit") int limit) {
+	  CompanyList list = new CompanyList(companyService.listCompanies(start, limit));
+	  return list;
+	}
+	The example above returns a list of companies (with server side pagination) which can be displayed with rich clients implemented using Ext-js or jQuery. You can read more more about setting up ExtJS grid panel with remote sorting and pagination using Hibernate.
+	
+
+
+@POST
+
+	Annotate POST request methods with @POST.
+	
+	@POST
+	@Consumes("application/json")
+	@Produces("application/json")
+	public RestResponse<Contact> create(Contact contact) {
+	...
+	}
+
+
+
+@Consumes
+
+	The @Consumes annotation is used to specify the MIME media types a REST resource can consume.
+	
+	@PUT
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Path("{contactId}")
+	public RestResponse<Contact> update(Contact contact) {
+	...
+	}
+
+
+
+@FormParam
+
+	The REST resources will usually consume XML/JSON for the complete Entity Bean. Sometimes, you may want to read parameters sent in POST requests directly and you can do that using @FormParam annotation. GET Request query parameters can be accessed using @QueryParam annotation.
+	
+	@POST
+	public String save(@FormParam("firstName") String firstName,
+	    @FormParam("lastName") String lastName) {
+	      ...
+	  }
+  
+@PUT
+	Annotate PUT request methods with @PUT.
+	
+	@PUT
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Path("{contactId}")
+	public RestResponse<Contact> update(Contact contact) {
+	...
+	}
+	
+	
+@DELETE
+
+	Annotate DELETE request methods with @DELETE.
+	
+	@DELETE
+	@Produces("application/json")
+	@Path("{contactId}")
+	public RestResponse<Contact> delete(@PathParam("contactId") int contactId) {
+		...
+	}
