@@ -40,7 +40,7 @@ public class HelloWorld {
 	@Path("/json/{name}")
 	@Produces("application/json")
 	public String getHelloWorldJSON(@PathParam("name") String name) {
-		System.out.println("name: " + name);
+		System.out.println("@PathParam /json/{name} =" + name);
 		return "{\"result\":\"" + helloService.createHelloMessage(name) + "\"}";
 	}
 
@@ -48,7 +48,7 @@ public class HelloWorld {
 	@Path("/xml/{name}")
 	@Produces("application/xml")
 	public String getHelloWorldXML(@PathParam("name") String name) {
-		System.out.println("name: " + name);
+		System.out.println("@PathParam /xml/{name} =" + name);
 		return "<xml><result>" + helloService.createHelloMessage(name)
 				+ "</result></xml>";
 	}

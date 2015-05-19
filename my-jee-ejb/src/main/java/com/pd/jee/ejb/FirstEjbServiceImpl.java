@@ -5,14 +5,27 @@ import static com.pd.jee.jar.RandomStringGenerator.createRandomString;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.*;
+import javax.enterprise.context.Dependent;
 
 import com.pd.jee.api.FirstEjbServiceLocal;
+import com.pd.jee.jar.SysoutPrintUtils;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(FirstEjbServiceLocal.class)
+// @ApplicationScoped or @RequestScoped not allowed on @Stateless.
+// Only @Dependent is allowed on stateless enterprise beans.
+@Dependent
 public class FirstEjbServiceImpl implements FirstEjbServiceLocal {
+
+    @PostConstruct
+    public void afterCreate() {
+	// Called just Once
+	SysoutPrintUtils
+		.printSysout("'@PostConstruct afterCreate' FirstEjbServiceImpl");
+    }
 
     @Override
     public List<String> listAddresses() {

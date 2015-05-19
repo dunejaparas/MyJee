@@ -14,8 +14,8 @@ public class ApplicationScopedIsForPoJo {
 	System.out.println("--------		ApplicationScopedIsForPoJo");
     }
 
-    private static final String POST_CONSTRUCT_AFTER_CREATE_APPLICATION_SCOPED = "'@PostConstruct afterCreate' ApplicationScopedIsForPoJo	SOUP >>>>>>>";
-    private static final String PRE_DESTROY_AT_SHUTDOWN_APPLICATION_SCOPED = "'@PreDestroy atShutdown' ApplicationScopedIsForPoJo	SOUP >>>>>>>";
+    private static final String POST_CONSTRUCT_AFTER_CREATE_APPLICATION_SCOPED = "\n'@PostConstruct afterCreate' ApplicationScopedIsForPoJo	SOUP >>>>>>>";
+    private static final String PRE_DESTROY_AT_SHUTDOWN_APPLICATION_SCOPED = "'@PreDestroy atShutdown' ApplicationScopedIsForPoJo	SOUP >>>>>>>\n";
 
     private String name = "Soup of the day";
 
