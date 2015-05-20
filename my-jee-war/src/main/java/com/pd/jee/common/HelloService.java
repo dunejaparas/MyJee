@@ -25,13 +25,15 @@ public class HelloService {
 
 	if (count++ % 2 == 0) {
 	    type.orderWhatTheOtherGuyHad();
-	    System.out.println("orderWhatTheOtherGuyHad : " + data);
+	    System.out.println(":::::::::::::::orderWhatTheOtherGuyHad : "
+		    + data);
 	} else if (count % 5 == 0) {
 	    slsb.requestSingletonSLSB();
-	    System.out.println("	requestSingletonSLSB : " + data);
+	    System.out.println(">>>>>>>>>>>>>>>requestSingletonSLSB : " + data);
 	} else {
 	    type.requestWhatTheOtherGuyHad();
-	    System.out.println("		requestWhatTheOtherGuyHad : " + data);
+	    System.out.println("+++++++++++++++requestWhatTheOtherGuyHad : "
+		    + data);
 	}
 	return "Hello " + name + "!";
     }

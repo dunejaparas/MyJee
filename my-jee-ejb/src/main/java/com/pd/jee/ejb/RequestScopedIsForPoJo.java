@@ -9,10 +9,6 @@ import com.pd.jee.jar.SysoutPrintUtils;
 @RequestScoped
 public class RequestScopedIsForPoJo {
     // This class is constructed and de-constructed for each request it caters
-    // to
-    {
-	System.out.println("\n--------		RequestScopedIsForPoJo");
-    }
 
     private static final String POST_CONSTRUCT_AFTER_CREATE_REQUEST_SCOPED = "\n'@PostConstruct afterCreate' RequestScopedIsForPoJo";
     private static final String PRE_DESTROY_AT_SHUTDOWN_REQUEST_SCOPED = "'@PreDestroy atShutdown' RequestScopedIsForPoJo\n";
