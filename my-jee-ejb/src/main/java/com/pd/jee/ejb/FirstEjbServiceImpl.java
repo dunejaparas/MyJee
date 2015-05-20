@@ -8,17 +8,25 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 
 import com.pd.jee.api.FirstEjbServiceLocal;
+import com.pd.jee.api.SecondEjbServiceLocal;
+import com.pd.jee.ejb.validator.SimpleBean;
 import com.pd.jee.jar.SysoutPrintUtils;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@Local(FirstEjbServiceLocal.class)
 // @ApplicationScoped or @RequestScoped not allowed on @Stateless.
 // Only @Dependent is allowed on stateless enterprise beans.
 @Dependent
 public class FirstEjbServiceImpl implements FirstEjbServiceLocal {
+
+    @EJB
+    SecondEjbServiceLocal dummyInjectUsage;
+
+    @Inject
+    SimpleBean helloBeanWithInterceptor;
 
     @PostConstruct
     public void afterCreate() {
@@ -36,6 +44,9 @@ public class FirstEjbServiceImpl implements FirstEjbServiceLocal {
 
     @Override
     public String findSubscriberIdByName(final String subscriberName) {
+	dummyInjectUsage.printSomethingToConsole("Injected using @EJB..."
+		+ subscriberName);
+	helloBeanWithInterceptor.setName(subscriberName);
 	return "No filtering done : " + createRandomString(5);
     }
 
