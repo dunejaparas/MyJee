@@ -7,7 +7,7 @@
 
 	<!-- TOR PMI Subscription Application -->
 	<context-param>
-		<param-name>javax.ws.rs.core.Application</param-name>
+		<param-name>javax.ws.rs.Application</param-name>
 		<param-value>com.pd.jee.init.ApplicationRegistry</param-value>
 	</context-param>
 

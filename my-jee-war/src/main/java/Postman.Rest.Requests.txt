@@ -1,0 +1,2 @@
+Following rest requests work with postman rest requests
+
