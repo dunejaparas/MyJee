@@ -1,11 +1,9 @@
 package org.jboss.as.quickstarts.rshelloworld;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.pd.jee.common.HelloService;
 
@@ -17,39 +15,48 @@ import com.pd.jee.common.HelloService;
 
 @Path("/hello")
 public class HelloWorld {
-	@Inject
-	HelloService helloService;
+    @Inject
+    HelloService helloService;
 
-	@GET
-	@Path("/json")
-	@Produces({ "application/json" })
-	public String getHelloWorldJSON() {
-		return "{\"result\":\"" + helloService.createHelloMessage("World")
-				+ "\"}";
-	}
+    @GET
+    @Path("/json")
+    @Produces({ "application/json" })
+    public String getHelloWorldJSON() {
+	return "{\"result\":\"" + helloService.createHelloMessage("World")
+		+ "\"}";
+    }
 
-	@GET
-	@Path("/xml")
-	@Produces({ "application/xml" })
-	public String getHelloWorldXML() {
-		return "<xml><result>" + helloService.createHelloMessage("World")
-				+ "</result></xml>";
-	}
+    @POST
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public Response setHelloWorldJSON(final String json) {
+	System.out.println("Consume and Produce JSON:" + json);
+	final String result = "{\"result\":\"ALL_PUBS_ATHLONE\"}";
+	return Response.status(Response.Status.ACCEPTED).entity(result).build();
+    }
 
-	@POST
-	@Path("/json/{name}")
-	@Produces("application/json")
-	public String getHelloWorldJSON(@PathParam("name") String name) {
-		System.out.println("@PathParam /json/{name} =" + name);
-		return "{\"result\":\"" + helloService.createHelloMessage(name) + "\"}";
-	}
+    @GET
+    @Path("/xml")
+    @Produces({ "application/xml" })
+    public String getHelloWorldXML() {
+	return "<xml><result>" + helloService.createHelloMessage("World")
+		+ "</result></xml>";
+    }
 
-	@POST
-	@Path("/xml/{name}")
-	@Produces("application/xml")
-	public String getHelloWorldXML(@PathParam("name") String name) {
-		System.out.println("@PathParam /xml/{name} =" + name);
-		return "<xml><result>" + helloService.createHelloMessage(name)
-				+ "</result></xml>";
-	}
+    @POST
+    @Path("/json/{name}")
+    @Produces("application/json")
+    public String getHelloWorldJSON(@PathParam("name") final String name) {
+	System.out.println("@PathParam /json/{name} =" + name);
+	return "{\"result\":\"" + helloService.createHelloMessage(name) + "\"}";
+    }
+
+    @POST
+    @Path("/xml/{name}")
+    @Produces("application/xml")
+    public String getHelloWorldXML(@PathParam("name") final String name) {
+	System.out.println("@PathParam /xml/{name} =" + name);
+	return "<xml><result>" + helloService.createHelloMessage(name)
+		+ "</result></xml>";
+    }
 }
