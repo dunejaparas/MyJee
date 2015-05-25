@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import javax.interceptor.*;
 
 import com.pd.jee.ejb.validator.annotations.ClassValidationInterceptorBinding;
+import com.pd.jee.ejb.validator.annotations.ValidateSomeData;
 
 @ClassValidationInterceptorBinding
 @Interceptor
@@ -20,12 +21,20 @@ public class ClassValidationInterceptor {
 	Object result = null;
 
 	final Method method = ctx.getMethod();
+	if (method.isAnnotationPresent(ValidateSomeData.class)) {
+	    final String outPutString = ">>>>>>>>>>>>	Found class Validation annotation @ValidateSomeData	<<<<<<<<<<<<<<<<<<<<<<<<<";
+	    System.out.println(outPutString);
+
+	} else {
+	    System.out.println("carry on ");
+	}
 
 	final Annotation[] annotations = method.getAnnotations();
 	for (final Annotation currentAnnotation : annotations) {
 	    System.out.println("currentAnnotation:Name "
 		    + currentAnnotation.getClass().getName());
 	}
+
 	/*
 	 * // We create various annotations and see which annotation is there to
 	 * // identify what to validate if

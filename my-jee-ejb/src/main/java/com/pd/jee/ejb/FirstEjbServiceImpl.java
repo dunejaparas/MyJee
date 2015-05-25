@@ -47,6 +47,7 @@ public class FirstEjbServiceImpl implements FirstEjbServiceLocal {
 	dummyInjectUsage.printSomethingToConsole("Injected using @EJB..."
 		+ subscriberName);
 	helloBeanWithInterceptor.setName(subscriberName);
+	helloBeanWithInterceptor.setAddress("Subscriber Address");
 	return "No filtering done : " + createRandomString(5);
     }
 
