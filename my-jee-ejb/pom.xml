@@ -91,7 +91,11 @@
 			<version>1.9.0</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>${version.derby.client}</version>
+		</dependency>
 		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
 			as the API is included in JBoss AS 7 -->
 		<dependency>
