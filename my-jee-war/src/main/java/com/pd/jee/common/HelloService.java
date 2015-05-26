@@ -2,6 +2,8 @@ package com.pd.jee.common;
 
 import javax.inject.Inject;
 
+import org.apache.log4j.Logger;
+
 import com.pd.jee.api.FirstEjbServiceLocal;
 import com.pd.jee.ejb.SingletonSLSB;
 import com.pd.jee.ejb.WaiterSLSB;
@@ -17,6 +19,8 @@ public class HelloService {
     @Inject
     SingletonSLSB slsb;
 
+    Logger logger = Logger.getLogger(this.getClass().getName());
+
     private static int count = 0;
 
     public String createHelloMessage(final String name) {
@@ -25,15 +29,13 @@ public class HelloService {
 
 	if (count++ % 2 == 0) {
 	    type.orderWhatTheOtherGuyHad();
-	    System.out.println(":::::::::::::::orderWhatTheOtherGuyHad : "
-		    + data);
+	    logger.debug(":::::::::::::::orderWhatTheOtherGuyHad : " + data);
 	} else if (count % 5 == 0) {
 	    slsb.requestSingletonSLSB();
-	    System.out.println(">>>>>>>>>>>>>>>requestSingletonSLSB : " + data);
+	    logger.debug(">>>>>>>>>>>>>>>requestSingletonSLSB : " + data);
 	} else {
 	    type.requestWhatTheOtherGuyHad();
-	    System.out.println("+++++++++++++++requestWhatTheOtherGuyHad : "
-		    + data);
+	    logger.debug("+++++++++++++++requestWhatTheOtherGuyHad : " + data);
 	}
 	return "Hello " + name + "!";
     }

@@ -7,6 +7,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+
 import com.pd.jee.common.HelloService;
 import com.pd.jee.common.ResponseData;
 
@@ -21,6 +23,9 @@ public class IrishPubs {
     @Inject
     HelloService helloService;
 
+    Logger logger = Logger.getLogger(this.getClass().getName());
+
+    
     // http://localhost:8080/my-jee/rest/irish/pubs
     @GET
     @Path("/pubs")
@@ -73,8 +78,8 @@ public class IrishPubs {
 	    return Response.status(Response.Status.ACCEPTED).entity(result)
 		    .build();
 	} catch (final Exception e) {
-	    System.err.println(e.getMessage());
-	    System.err.println(e);
+	    logger.error(e.getMessage());
+	    logger.error(e);
 	    response.setCode(Response.Status.INTERNAL_SERVER_ERROR);
 	    response.setError(e.getMessage());
 	}

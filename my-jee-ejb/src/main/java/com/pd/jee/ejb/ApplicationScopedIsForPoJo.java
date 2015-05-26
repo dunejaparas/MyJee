@@ -4,14 +4,19 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 
+import org.apache.log4j.Logger;
+
 import com.pd.jee.jar.SysoutPrintUtils;
 
 @ApplicationScoped
 public class ApplicationScopedIsForPoJo {
     // This class is constructed just once for the lifetime of started instance
 
+    
+    Logger logger = Logger.getLogger(this.getClass().getName());
+
     {
-	System.out.println("--------		ApplicationScopedIsForPoJo");
+	logger.debug("--------		ApplicationScopedIsForPoJo");
     }
 
     private static final String POST_CONSTRUCT_AFTER_CREATE_APPLICATION_SCOPED = "\n'@PostConstruct afterCreate' ApplicationScopedIsForPoJo	SOUP >>>>>>>";

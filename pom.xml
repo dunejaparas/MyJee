@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 
 	<prerequisites>
-		<maven>3.0.3</maven>
+		<maven>3.2.5</maven>
 	</prerequisites>
 
 	<name>[${project.artifactId}] JEE6 Project</name>
@@ -31,7 +31,8 @@
 		<version.testng>6.1</version.testng>
 		<project.ear.defaultLibBundleDir>lib</project.ear.defaultLibBundleDir>
 		<!-- JBoss modules your service will automatically add to classpath -->
-		<project.ear.Dependencies>org.slf4j</project.ear.Dependencies>
+		<project.ear.Dependencies>org.apache.log4j</project.ear.Dependencies>
+		
 	</properties>
 
 	<dependencyManagement>
@@ -90,7 +91,11 @@
 			<version>6.9.4</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>

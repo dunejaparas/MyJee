@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 
 import javax.interceptor.*;
 
+import org.apache.log4j.Logger;
+
 import com.pd.jee.ejb.validator.annotations.ClassValidationInterceptorBinding;
 import com.pd.jee.ejb.validator.annotations.ValidateSomeData;
 
@@ -14,24 +16,26 @@ public class ClassValidationInterceptor {
 
     // @Inject
     // private SubscriptionValidationUtil validationUtil;
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
+    
     @AroundInvoke
     public Object validate(final InvocationContext ctx) throws Exception { // NOPMD
-	System.out.println(">>> ClassValidationInterceptor >>>");
+	logger.debug(">>> ClassValidationInterceptor >>>");
 	Object result = null;
 
 	final Method method = ctx.getMethod();
 	if (method.isAnnotationPresent(ValidateSomeData.class)) {
 	    final String outPutString = ">>>>>>>>>>>>	Found class Validation annotation @ValidateSomeData	<<<<<<<<<<<<<<<<<<<<<<<<<";
-	    System.out.println(outPutString);
+	    logger.debug(outPutString);
 
 	} else {
-	    System.out.println("carry on ");
+	    logger.debug("carry on ");
 	}
 
 	final Annotation[] annotations = method.getAnnotations();
 	for (final Annotation currentAnnotation : annotations) {
-	    System.out.println("currentAnnotation:Name "
+	    logger.debug("currentAnnotation:Name "
 		    + currentAnnotation.getClass().getName());
 	}
 
@@ -57,7 +61,7 @@ public class ClassValidationInterceptor {
 	 * doGenericValidation(firstParameter); }
 	 */
 	result = ctx.proceed();
-	System.out.println("<<< ClassValidationInterceptor <<<");
+	logger.debug("<<< ClassValidationInterceptor <<<");
 	return result;
     }
 
