@@ -39,3 +39,13 @@ DEPLOYING TO JBOSS
 	
 	Once you started JBoss you have to execute mvn jboss-as:deploy to deploy service
 	or execute "./deploy_to_local_jboss.sh" to copy the ear to deployments folder 
+
+
++----------------------------+
+NOTE FOR LOGGING
++----------------------------+
+	Update standalone.xml with 
+	            <logger category="com.pd.jee" use-parent-handlers="true">
+	                <level name="DEBUG"/>
+	            </logger>
+            
