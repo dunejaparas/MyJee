@@ -112,7 +112,6 @@
 	</dependencies>
 	<modules>
 		<module>my-jee-api</module>
-		<module>my-jee-bom</module>
 		<module>my-jee-jar</module>
 		<module>my-jee-ejb</module>
 		<module>my-jee-war</module>
