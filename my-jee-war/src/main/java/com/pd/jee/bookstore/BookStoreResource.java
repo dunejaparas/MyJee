@@ -35,15 +35,14 @@ public class BookStoreResource {
     @POST
     @Path("/{bookName}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    public String createBookAtTheStore(@PathParam("bookName") final String bookName) {
+    public Response createBookAtTheStore(@PathParam("bookName") final String bookName) {
 	final Book newBook = new Book();
 	newBook.setBookName(bookName);
 	final boolean isSaved = bookServiceLocal.save(newBook);
 	if (isSaved) {
-	    return "{\"result\":\" Success " + newBook.toString() + " \"}";
+	    return Response.status(Status.ACCEPTED).entity("{\"result\":\" Success " + newBook.toString() + " \"}").build();
 	} else {
-	    return "{\"result\":\" Failed " + newBook.toString() + "  \"}";
+	    return Response.status(Status.ACCEPTED).entity("{\"result\":\" Failed " + newBook.toString() + " \"}").build();
 	}
     }
-
 }

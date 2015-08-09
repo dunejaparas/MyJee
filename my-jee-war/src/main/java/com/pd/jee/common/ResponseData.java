@@ -1,23 +1,16 @@
 package com.pd.jee.common;
 
 import javax.ws.rs.core.Response.Status;
-import javax.xml.bind.annotation.*;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "response")
 public class ResponseData {
 
-    @XmlElement
     protected Status code;
 
-    @XmlElement
     protected String error;
 
-    @XmlElement
     private Object[] parameters;
 
-    public ResponseData(final Status code, final String error,
-	    final Object... parameters) {
+    public ResponseData(final Status code, final String error, final Object... parameters) {
 	this.code = code;
 	this.error = error;
 	this.parameters = parameters;
