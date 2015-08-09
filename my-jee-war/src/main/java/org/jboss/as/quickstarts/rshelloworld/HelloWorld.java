@@ -12,7 +12,7 @@ import com.pd.jee.common.HelloService;
 /**
  * A simple REST service which is able to say hello to someone using
  * HelloService Please take a look at the web.xml where JAX-RS is enabled
- * 
+ *
  */
 
 @Path("/hello")
@@ -22,6 +22,7 @@ public class HelloWorld {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
+    // http://localhost:8080/my-jee/rest/hello/json
     @GET
     @Path("/json")
     @Produces({ "application/json" })
