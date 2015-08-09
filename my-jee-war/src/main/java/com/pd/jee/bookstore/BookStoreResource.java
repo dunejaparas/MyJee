@@ -17,6 +17,7 @@ public class BookStoreResource {
     @Inject
     BookServiceLocal<Book> bookServiceLocal;
 
+    // http://localhost:8080/my-jee/rest/bookstore/all
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON })
@@ -29,6 +30,8 @@ public class BookStoreResource {
 	return Response.status(responseData.getCode()).entity(responseData).build();
     }
 
+    // http://localhost:8080/my-jee/rest/bookstore/Harry Porter
+    // http://localhost:8080/my-jee/rest/bookstore/Hello
     @POST
     @Path("/{bookName}")
     @Consumes({ MediaType.APPLICATION_JSON })
