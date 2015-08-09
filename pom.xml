@@ -27,7 +27,7 @@
 		<version.arquillian-weld-se-embedded>1.0.0.CR3</version.arquillian-weld-se-embedded>
 		<version.jboss-as-maven-plugin>${version.jboss.as}</version.jboss-as-maven-plugin>
 		<version.easymock>3.1</version.easymock>
-
+		<version.war.plugin>2.1.1</version.war.plugin>
 		<version.derby.client>10.11.1.1</version.derby.client>
 
 		<version.testng>6.1</version.testng>
@@ -87,6 +87,12 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+			<scope>provided</scope>
+		</dependency>		
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>

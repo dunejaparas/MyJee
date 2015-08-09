@@ -65,20 +65,27 @@ Direct Deployment
 	
 	Then you have to adapt the file [JBOSS]/standalone/configuration/standalone.xml. 
 	Add the following section into the file:			
-				<datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false">
-					<connection-url>jdbc:derby://localhost:1527/derbyDB;create=true</connection-url>
-					<driver-class>org.apache.derby.jdbc.ClientDriver</driver-class>
-					<driver>derbyclient.jar</driver>
-					<security>
-						<user-name>demo</user-name>
-						<password>demo</password>
-					</security>
-					<validation>
-						<validate-on-match>false</validate-on-match>
-						<background-validation>false</background-validation>
-					</validation>
-					<statement>
-						<share-prepared-statements>false</share-prepared-statements>
-					</statement>
-				</datasource>	
-	
+
+	<datasources>
+		<datasource jndi-name="java:jboss/datasources/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false">
+			<connection-url>jdbc:derby://localhost:1527/derbyDBJee;create=true</connection-url>
+			<driver-class>org.apache.derby.jdbc.ClientDriver</driver-class>
+			<driver>derbyclient.jar</driver>
+			<security>
+				<user-name>demo</user-name>
+				<password>demo</password>
+			</security>
+			<validation>
+				<validate-on-match>false</validate-on-match>
+				<background-validation>false</background-validation>
+			</validation>
+			<statement>
+				<share-prepared-statements>false</share-prepared-statements>
+			</statement>
+		</datasource>
+		<drivers>
+			<driver name="org.apache.derby" module="org.apache.derby">
+				<xa-datasource-class>org.apache.derby.jdbc.ClientXADataSource</xa-datasource-class>
+			</driver>
+		</drivers>
+	</datasources>	

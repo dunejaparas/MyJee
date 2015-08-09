@@ -20,6 +20,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.war.plugin}</version>
 				<configuration>
 					<failOnMissingWebXml>my-jee</failOnMissingWebXml>
 					<webappDirectory>target/${project.parent.artifactId}-${project.version}</webappDirectory>

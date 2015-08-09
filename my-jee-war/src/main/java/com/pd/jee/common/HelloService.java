@@ -27,16 +27,19 @@ public class HelloService {
 
 	final String data = ejbServiceLocal.findSubscriberIdByName(name);
 
-	if (count++ % 2 == 0) {
+	System.out.println("Count :" + count);
+	System.out.println(System.getProperty("user.dir"));
+	if (count % 5 == 0) {
 	    type.orderWhatTheOtherGuyHad();
 	    logger.debug(":::::::::::::::orderWhatTheOtherGuyHad : " + data);
-	} else if (count % 5 == 0) {
+	} else if (count % 2 == 0) {
 	    slsb.requestSingletonSLSB();
 	    logger.debug(">>>>>>>>>>>>>>>requestSingletonSLSB : " + data);
 	} else {
 	    type.requestWhatTheOtherGuyHad();
 	    logger.debug("+++++++++++++++requestWhatTheOtherGuyHad : " + data);
 	}
+	count++;
 	return "Hello " + name + "!";
     }
 

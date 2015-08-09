@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0051)http://www.hameister.org/JBoss_DatasourceDerby.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title>JBoss 7 datasource for Apache Derby</title>
+	
+
+	<!-- Include required JS files -->
+	<script async="" type="text/javascript" src="./JBoss 7 datasource for Apache Derby_files/ca-pub-5083785115300027.js"></script><script type="text/javascript" async="" src="./JBoss 7 datasource for Apache Derby_files/ga.js"></script><script type="text/javascript" src="./JBoss 7 datasource for Apache Derby_files/shCore.js"></script>
+	<script type="text/javascript" src="./JBoss 7 datasource for Apache Derby_files/shBrushJava.js"></script>
+	<script type="text/javascript" src="./JBoss 7 datasource for Apache Derby_files/shBrushXml.js"></script>
+	
+	
+	<!-- Include *at least* the core style and default theme -->
+	<link href="./JBoss 7 datasource for Apache Derby_files/shCore.css" rel="stylesheet" type="text/css">
+	<link href="./JBoss 7 datasource for Apache Derby_files/shThemeDefault.css" rel="stylesheet" type="text/css">
+	<link href="http://www.hameister.org/JBoss_DatasourceDerby.html" rel="stylesheet" type="text/css">
+	
+
+	
+
+	
+
+	
+
+
+<body id="start"> <!-- Wrapper complete-->
+	<div id="wrappper"> <!-- Wrapper -->
+<div id="header">
+
+
+<!-- ***************************************************** -->
+<!-- Logo -->
+<!-- ***************************************************** -->
+
+		
+		
+		
+				<div id="content">
+
+		
+	
+<!--
+#############################################################
+#############################################################
+#############################################################
+-->		
+<div class="text">	
+	<h1>JBoss 7 datasource for Apache Derby</h1>	
+
+</div>
+
+		<a name="20110612"></a>
+<script type="text/javascript"><!--
+google_ad_client = "pub-5083785115300027";
+/* 728x90, Erstellt 08.01.11 */
+google_ad_slot = "0624882283";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+	
+		<div class="text">
+		
+
+
+
+
+
+
+
+		
+			<h2>JBoss DataSource for Apache Derby</h2>
+
+
+<p>
+This short article describes how configure a DataSource for Apache Derby 10.9 in JBoss AS 7.1.1. Generally there are two ways to create a DataSource in JBoss:
+</p>
+
+<ul>
+	<li>Copy the JDBC driver into the <code>deployments</code> directory</li>
+	<li>Create a module with the JDBC driver</li>
+</ul>
+
+<p>
+Also it is necessary to create a DataSource definition in the file <code>standalone.xml</code>. <strong>It is recommended to deploy the driver as module.</strong>
+</p>
+
+
+<p></p>
+
+<h3>Direct Deployment</h3>
+
+<p>
+The first solution is a very easy way to deploy the Derby driver in the application server. If you quickly want to test something it is sufficient. But in a productive environment it is better to create a module definition in the JBoss. (see next section) 
+</p>
+
+<p>
+To deploy the Derby driver directly you simply copy the driver <code>derbyclient.jar</code> into the directory <code>[JBOSS]/standalone/deployments</code>. If the server is running the new file is recognized by JBoss and automatically deployed.
+</p>
+
+<p>
+Then you have to adapt the file <code>[JBOSS]/standalone/configuration/standalone.xml</code>. Add the following section into the file:
+</p>
+
+<div><div id="highlighter_647027" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://www.hameister.org/JBoss_DatasourceDerby.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">datasources</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="xml plain">...</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">datasource</code> <code class="xml color1">jndi-name</code><code class="xml plain">=</code><code class="xml string">"java:/DerbyDS"</code> <code class="xml color1">pool-name</code><code class="xml plain">=</code><code class="xml string">"DerbyDS"</code> <code class="xml color1">enabled</code><code class="xml plain">=</code><code class="xml string">"true"</code> <code class="xml color1">use-ccm</code><code class="xml plain">=</code><code class="xml string">"false"</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">connection-url</code><code class="xml plain">&gt;jdbc:<a href="derby://localhost:1527/jhDB;create=true">derby://localhost:1527/jhDB;create=true</a>&lt;/</code><code class="xml keyword">connection-url</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">driver-class</code><code class="xml plain">&gt;org.apache.derby.jdbc.ClientDriver&lt;/</code><code class="xml keyword">driver-class</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">driver</code><code class="xml plain">&gt;derbyclient.jar&lt;/</code><code class="xml keyword">driver</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">security</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">user-name</code><code class="xml plain">&gt;demo&lt;/</code><code class="xml keyword">user-name</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">password</code><code class="xml plain">&gt;demo&lt;/</code><code class="xml keyword">password</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">security</code><code class="xml plain">&gt;</code></div><div class="line number13 index12 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">validation</code><code class="xml plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">validate-on-match</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">validate-on-match</code><code class="xml plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">background-validation</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">background-validation</code><code class="xml plain">&gt;</code></div><div class="line number16 index15 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">validation</code><code class="xml plain">&gt;</code></div><div class="line number17 index16 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">statement</code><code class="xml plain">&gt;</code></div><div class="line number18 index17 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">share-prepared-statements</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">share-prepared-statements</code><code class="xml plain">&gt;</code></div><div class="line number19 index18 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">statement</code><code class="xml plain">&gt;</code></div><div class="line number20 index19 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">datasource</code><code class="xml plain">&gt;</code></div><div class="line number21 index20 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number22 index21 alt1"><code class="xml plain">...</code></div><div class="line number23 index22 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">datasources</code><code class="xml plain">&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code></div></div></td></tr></tbody></table></div></div>
+
+<p>
+Please note: JBoss 7.1.1 has a <em>bug</em> (<a href="https://issues.jboss.org/browse/AS7-4222" target="_default">AS7-4222</a>). When deploying a JDBC driver direct in the <code>deployments</code> directory an error occurs in the logfile or console:
+</p>
+
+<div><div id="highlighter_869258" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://www.hameister.org/JBoss_DatasourceDerby.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">14:58:20,140 INFO&nbsp; [org.jboss.as.controller] (Controller Boot Thread) JBAS014774: Service status report</code></div><div class="line number2 index1 alt1"><code class="xml plain">JBAS014775:&nbsp;&nbsp;&nbsp; New missing/unsatisfied dependencies:</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">service jboss.jdbc-driver.derbyclient_jar (missing) dependents: [service jboss.data-source.java:/DerbyDS] </code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="xml plain">...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="xml plain">14:58:20,337 INFO&nbsp; [org.jboss.as.server] (DeploymentScanner-threads - 2) JBAS018559: Deployed "derbyclient.jar"</code></div><div class="line number8 index7 alt1"><code class="xml plain">14:58:20,338 INFO&nbsp; [org.jboss.as.controller] (DeploymentScanner-threads - 2) JBAS014774: Service status report</code></div><div class="line number9 index8 alt2"><code class="xml plain">JBAS014776:&nbsp;&nbsp;&nbsp; Newly corrected services:</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">service jboss.jdbc-driver.derbyclient_jar (no longer required)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code></div></div></td></tr></tbody></table></div></div>
+
+
+<h3>Deployment as module</h3>
+
+<p>
+To deploy the driver as a module you have to create the following directory <code>[JBOSS]/modules/org/apache/derby/main</code> (<code>[JBOSS]/modules/org/apache</code> should already exist.). In this directory create a file <code>module.xml</code> with the following content:
+</p>
+
+<div><div id="highlighter_709285" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://www.hameister.org/JBoss_DatasourceDerby.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">module</code> <code class="xml color1">xmlns</code><code class="xml plain">=</code><code class="xml string">"urn:jboss:module:1.0"</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"org.apache.derby"</code><code class="xml plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">resources</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">resource-root</code> <code class="xml color1">path</code><code class="xml plain">=</code><code class="xml string">"derbyclient.jar"</code><code class="xml plain">/&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">resources</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">dependencies</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">module</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"javax.api"</code><code class="xml plain">/&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">dependencies</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">module</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+
+
+<p>
+Copy the Derby JDBC driver <code>derbyclient.jar</code> into the directory <code>[JBOSS]/modules/org/apache/derby/main</code>, too.
+</p>
+
+
+<p>
+Now you have to adapt the file <code>standalone.xml</code> in the directory <code>[JBOSS]/standalone/configuration</code>. Add the following datasource definition in the section <code>datasources</code>.
+</p>
+
+<div><div id="highlighter_454631" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://www.hameister.org/JBoss_DatasourceDerby.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">datasources</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="xml plain">...</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">datasource</code> <code class="xml color1">jndi-name</code><code class="xml plain">=</code><code class="xml string">"java:/DerbyDS"</code> <code class="xml color1">pool-name</code><code class="xml plain">=</code><code class="xml string">"DerbyDS"</code> <code class="xml color1">enabled</code><code class="xml plain">=</code><code class="xml string">"true"</code> <code class="xml color1">use-ccm</code><code class="xml plain">=</code><code class="xml string">"false"</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">connection-url</code><code class="xml plain">&gt;jdbc:<a href="derby://localhost:1527/jhDB;create=true">derby://localhost:1527/jhDB;create=true</a>&lt;/</code><code class="xml keyword">connection-url</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">driver</code><code class="xml plain">&gt;org.apache.derby&lt;/</code><code class="xml keyword">driver</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">security</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">user-name</code><code class="xml plain">&gt;demo&lt;/</code><code class="xml keyword">user-name</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">password</code><code class="xml plain">&gt;demo&lt;/</code><code class="xml keyword">password</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">security</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">validation</code><code class="xml plain">&gt;</code></div><div class="line number13 index12 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">validate-on-match</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">validate-on-match</code><code class="xml plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">background-validation</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">background-validation</code><code class="xml plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">validation</code><code class="xml plain">&gt;</code></div><div class="line number16 index15 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">statement</code><code class="xml plain">&gt;</code></div><div class="line number17 index16 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">share-prepared-statements</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">share-prepared-statements</code><code class="xml plain">&gt;</code></div><div class="line number18 index17 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">statement</code><code class="xml plain">&gt;</code></div><div class="line number19 index18 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">datasource</code><code class="xml plain">&gt;</code></div><div class="line number20 index19 alt1">&nbsp;</div><div class="line number21 index20 alt2">&nbsp;</div><div class="line number22 index21 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">drivers</code><code class="xml plain">&gt;</code></div><div class="line number23 index22 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">driver</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"org.apache.derby"</code> <code class="xml color1">module</code><code class="xml plain">=</code><code class="xml string">"org.apache.derby"</code><code class="xml plain">&gt;</code></div><div class="line number24 index23 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">xa-datasource-class</code><code class="xml plain">&gt;org.apache.derby.jdbc.ClientXADataSource&lt;/</code><code class="xml keyword">xa-datasource-class</code><code class="xml plain">&gt;</code></div><div class="line number25 index24 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">driver</code><code class="xml plain">&gt;</code></div><div class="line number26 index25 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">drivers</code><code class="xml plain">&gt;</code></div><div class="line number27 index26 alt2">&nbsp;</div><div class="line number28 index27 alt1"><code class="xml plain">...</code></div><div class="line number29 index28 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">datasources</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+
+<p>
+When you restart JBoss the datasource is available. You can verify this by opening the JBoss Admin Console:
+</p>
+
+
+<p></p>
+
+<h3>Further informations</h3>
+
+<ul>
+	<li><a href="https://community.jboss.org/wiki/DataSourceConfigurationinAS7" target="_default">DataSource configuration JBoss AS7</a></li>
+	<li><a href="https://docs.jboss.org/author/display/AS71/Developer+Guide#DeveloperGuide-UpdatetheDataSourceConfiguration" target="_default">Update the DataSource Configuration</a></li>
+</ul>
+
+<p></p>
+<p></p>
+
+	
+
+
+<p></p>
+
+
+
+</div>
+	
+		
+<!--
+#############################################################
+#############################################################
+#############################################################
+-->		
+	
+	
+		
+	
+		
+				</div> <!-- End content-->
+		
+	</div> <!-- End Wrapper -->
+	
+</body></html>
